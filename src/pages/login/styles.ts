@@ -7,20 +7,20 @@ export const style = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 20,
+        // padding: 20,
     },
     boxTop: {
-        height: 200,
+        height:Dimensions.get('window').height / 3,
         width: '100%',
         backgroundColor: 'red'
     },
         boxMid: {
-        height: 200,
+        height:Dimensions.get('window').height / 4,
         width: '100%',
         backgroundColor: 'green'
     },
         boxBotton: {
-        height: 200,
+        height:Dimensions.get('window').height / 3,
         width: '100%',
         backgroundColor: 'blue'
     },
