@@ -1,11 +1,34 @@
-import React from "react";
-import { Text, View, Image, TextInput, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { Text, View, Image, TextInput, TouchableOpacity, Alert, ActivityIndicator} from "react-native";
 import { style } from "./styles"
 import Logo from "../../assets/logo (1).png"
 import { MaterialIcons } from "@expo/vector-icons"
 import { themas } from "../../global/themes";
 
 export default function Login () {
+    const [email, setEmail] = useState('');
+    const [password, setpassword] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    async function getLogin(){
+        try {
+            setLoading(true)
+            if(!email || !password) {
+                return Alert.alert('Atenção', 'Informe os campos obrigatórios!')
+            }
+
+            setTimeout(() => {
+                if (email == 'yuji@gmail.com' && password == '12345678'){
+                    Alert.alert('Logado com sucesso');
+                } else {
+                    Alert.alert('Usuário não encontrado!');
+                }
+                setLoading(false)
+            }, 3000)
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         < View style = { style.container} >
             <View style={style.boxTop}>
@@ -21,6 +44,8 @@ export default function Login () {
                 <View style={style.boxInput}>
                     <TextInput 
                         style={style.input}
+                        value={email}
+                        onChangeText={setEmail}
                     />
                     <MaterialIcons 
                     name="email"
@@ -32,6 +57,9 @@ export default function Login () {
                 <View style={style.boxInput}>
                     <TextInput 
                         style={style.input}
+                        value={password}
+                        onChangeText={setpassword}
+
                     />
                     <MaterialIcons 
                     name="remove-red-eye"
@@ -41,8 +69,11 @@ export default function Login () {
                 </View>
             </View>
             <View style={style.boxBotton}>
-                <TouchableOpacity style={style.button}>
-                    <Text style={style.textButton}>Entrar</Text>
+                <TouchableOpacity style={style.button} onPress={() => getLogin()}>
+                    {
+                        loading ? <ActivityIndicator color={'#fff'} size={"small"} /> : 
+                        <Text style={style.textButton}>Entrar</Text>
+                    }
                 </TouchableOpacity>
             </View>
             <Text style={style.textBotton}>Não tem uma conta?

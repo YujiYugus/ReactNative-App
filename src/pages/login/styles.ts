@@ -25,17 +25,10 @@ export const style = StyleSheet.create({
         boxBotton: {
         height:Dimensions.get('window').height / 3,
         width: '100%',
-        backgroundColor: 'blue',
+        // backgroundColor: 'blue',
         alignItems: 'center',
         justifyContent: 'center',
-        shadowColor: '#000',
-        shadowOffset: {
-            width:0,
-            height:3,
-        },
-        shadowOpacity:0.29,
-        shadowRadius:4.65,
-        elevation:7,
+
     },
     logo: {
         width: 80 ,
