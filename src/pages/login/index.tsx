@@ -4,7 +4,7 @@ import { style } from "./styles"
 import Logo from "../../assets/logo (1).png"
 import { MaterialIcons } from "@expo/vector-icons"
 import { themas } from "../../global/themes";
-import { Input } from "../../components/input";
+import { Input } from '../../components/input';
 
 export default function Login () {
     const [email, setEmail] = useState('');
