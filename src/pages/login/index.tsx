@@ -4,6 +4,7 @@ import { style } from "./styles"
 import Logo from "../../assets/logo (1).png"
 import { MaterialIcons } from "@expo/vector-icons"
 import { themas } from "../../global/themes";
+import { Input } from "../../components/input";
 
 export default function Login () {
     const [email, setEmail] = useState('');
@@ -40,8 +41,9 @@ export default function Login () {
                 <Text style={style.text}>Bem vindo de volta!</Text>
             </View>
             <View style={style.boxMid}>
-                <Text style={style.titleInput}>ENDEREÇO DE E-MAIL</Text>
-                <View style={style.boxInput}>
+                <Input />
+                {/* <Text style={style.titleInput}>ENDEREÇO DE E-MAIL</Text>
+                 <View style={style.boxInput}>
                     <TextInput 
                         style={style.input}
                         value={email}
@@ -66,7 +68,7 @@ export default function Login () {
                     size={20}
                     color={themas.colors.gray}
                     />
-                </View>
+                </View> */}
             </View>
             <View style={style.boxBotton}>
                 <TouchableOpacity style={style.button} onPress={() => getLogin()}>
