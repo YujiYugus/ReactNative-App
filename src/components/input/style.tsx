@@ -24,6 +24,9 @@ export const style = StyleSheet.create({
     titleInput: {
         marginLeft: 5,
         color: themas.colors.gray,
-        marginTop:20,
+        marginTop: 20,
+    },
+    Icon: {
+        width: "100%",
     },
 })
