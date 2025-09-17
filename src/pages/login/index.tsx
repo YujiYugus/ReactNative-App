@@ -28,8 +28,7 @@ export default function Login() {
             if (!email || !password) {
                 return Alert.alert('Atenção', 'Informe os campos obrigatórios!');
             }
-
-            navigation.reset({routes: [{name: "BottomRoutes"}]})
+            navigation.reset({ routes: [{ name: "BottomRoutes" }] })
 
             console.log("Logou!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
