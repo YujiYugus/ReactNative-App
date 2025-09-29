@@ -102,6 +102,26 @@ export const AuthProviderList = (props: any): any => {
                         title="Tempo limite:"
                         labelStyle={styles.label}
                     /> */}
+                    <View style={{flexDirection: 'row', gap: 10, width: '100%'}}>
+                        <TouchableOpacity onPress={() => setShowDatePicker(true)} style={{width: 200}}>
+                            <Input 
+                            title="Data Limite"
+                            labelStyle={styles.label}
+                            editable={false}
+                            value={selectedDate.toLocaleDateString()}
+                            onPress={() => setShowDatePicker(true)}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ width: 120 }}>
+                            <Input 
+                            title="Hora Limite"
+                            labelStyle={styles.label}
+                            editable={false}
+                            value={selectedTime.toLocaleTimeString()}
+                            onPress={() => setShowTimePicker(true)}
+                            />
+                        </TouchableOpacity>
+                    </View>
                     <CustomDateTimePicker 
                     onDateChange={handleDateChange}
                     setShow={setShowDatePicker}
