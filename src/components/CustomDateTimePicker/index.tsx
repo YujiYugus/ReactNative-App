@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Modal, Platform, View } from "react-native";
 import { style } from "./styles";
@@ -11,6 +11,12 @@ const CustomDateTimePicker = ({ type, onDateChange, show, setShow }) => {
         setDate(currentDate);
         setShow(false) //oculta o picker após a seleção
     }
+
+    useEffect(() => {
+        if (onDateChange) {
+            onDateChange(date)
+        }
+    }, [date, onDateChange])
 
     return (
         <Modal
