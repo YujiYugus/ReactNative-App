@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useRef, useEffect, useState } from "react";
-import { Dimensions, KeyboardAvoidingView, Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Dimensions, KeyboardAvoidingView, Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { Modalize } from "react-native-modalize";
 import { Input } from "../components/input";
@@ -25,7 +25,7 @@ export const AuthProviderList = (props: any): any => {
     const [selectedTime, setSelectedTime] = useState(new Date());
     const [ShowDatePicker, setShowDatePicker] = useState(false);
     const [ShowTimePicker, setShowTimePicker] = useState(false);
-    const [item, setItem] = useState (0);
+    const [item, setItem] = useState(0);
 
 
     const onOpen = () => {
@@ -59,28 +59,37 @@ export const AuthProviderList = (props: any): any => {
     const handleTimeChange = (date) => {
         setSelectedTime(date);
     }
-    const handleSave = () => {
-        const newItem = {
-             item: Date.now,
-             title,
-             description,
-             flags: selectedFlag,
-             timeLimite: new Date (
-                selectedDate.getFullYear(),
-                selectedDate.getMonth(),
-                selectedDate.getDate(),
-                selectedTime.getHours(),
-                selectedTime.getMinutes(),  
-             ).toISOString
+    const handleSave = async () => {
+        if (!title || !description || !selectedFlag) {
+            return Alert.alert('Atenção', 'Prencha os campos corretamente')
         }
-        console.log(newItem)
+        try {
+            const newItem = {
+                item: Date.now,
+                title,
+                description,
+                flags: selectedFlag,
+                timeLimite: new Date(
+                    selectedDate.getFullYear(),
+                    selectedDate.getMonth(),
+                    selectedDate.getDate(),
+                    selectedTime.getHours(),
+                    selectedTime.getMinutes(),
+                ).toISOString()
+            }
+
+            await AsyncStorage.setItem('tasklist', JSON.stringify(newItem))
+
+        } catch (error) {
+            console.log("Erro ao salvar o item", error)
+        }
     }
 
     const _container = () => {
         return (
             <KeyboardAvoidingView
-            style={styles.container}
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                style={styles.container}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
 
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => onClose()}>
@@ -123,37 +132,37 @@ export const AuthProviderList = (props: any): any => {
                         title="Tempo limite:"
                         labelStyle={styles.label}
                     /> */}
-                    <View style={{flexDirection: 'row', gap: 10, width: '100%'}}>
-                        <TouchableOpacity onPress={() => setShowDatePicker(true)} style={{width: 200}}>
-                            <Input 
-                            title="Data Limite"
-                            labelStyle={styles.label}
-                            editable={false}
-                            value={selectedDate.toLocaleDateString()}
-                            onPress={() => setShowDatePicker(true)}
+                    <View style={{ flexDirection: 'row', gap: 10, width: '100%' }}>
+                        <TouchableOpacity onPress={() => setShowDatePicker(true)} style={{ width: 200 }}>
+                            <Input
+                                title="Data Limite"
+                                labelStyle={styles.label}
+                                editable={false}
+                                value={selectedDate.toLocaleDateString()}
+                                onPress={() => setShowDatePicker(true)}
                             />
                         </TouchableOpacity>
                         <TouchableOpacity style={{ width: 120 }} onPress={() => setShowTimePicker(true)}>
-                            <Input 
-                            title="Hora Limite"
-                            labelStyle={styles.label}
-                            editable={false}
-                            value={selectedTime.toLocaleTimeString()}
-                            onPress={() => setShowTimePicker(true)}
+                            <Input
+                                title="Hora Limite"
+                                labelStyle={styles.label}
+                                editable={false}
+                                value={selectedTime.toLocaleTimeString()}
+                                onPress={() => setShowTimePicker(true)}
                             />
                         </TouchableOpacity>
                     </View>
-                    <CustomDateTimePicker 
-                    onDateChange={handleDateChange}
-                    setShow={setShowDatePicker}
-                    show={ShowDatePicker}
-                    type={'date'}
+                    <CustomDateTimePicker
+                        onDateChange={handleDateChange}
+                        setShow={setShowDatePicker}
+                        show={ShowDatePicker}
+                        type={'date'}
                     />
-                    <CustomDateTimePicker 
-                    onDateChange={handleTimeChange}
-                    setShow={setShowTimePicker}
-                    show={ShowTimePicker}
-                    type={'time'}
+                    <CustomDateTimePicker
+                        onDateChange={handleTimeChange}
+                        setShow={setShowTimePicker}
+                        show={ShowTimePicker}
+                        type={'time'}
                     />
                 </View>
                 <View style={styles.containerFlag}>
