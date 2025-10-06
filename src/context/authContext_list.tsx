@@ -37,8 +37,8 @@ export const AuthProviderList = (props: any): any => {
         modalizeRef?.current?.close();
     }
     useEffect(() => {
-        console.log(taskList.length)
-    }, [taskList]);
+        get_taskList
+    }, []);
 
     const _renderFlags = () => {
         return (
@@ -63,6 +63,7 @@ export const AuthProviderList = (props: any): any => {
     const handleTimeChange = (date) => {
         setSelectedTime(date);
     }
+
     const handleSave = async () => {
         if (!title || !description || !selectedFlag) {
             return Alert.alert('Atenção', 'Prencha os campos corretamente')
@@ -104,6 +105,16 @@ export const AuthProviderList = (props: any): any => {
             setItem(0),
             setSelectedDate(new Date())
             setSelectedTime(new Date())
+    }
+
+    async function get_taskList() {
+        try{
+            const storageData = await AsyncStorage.getItem('taskList')
+            const taskList = storageData ? JSON.parse(storageData) : []
+            setTaskList(taskList)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const _container = () => {
