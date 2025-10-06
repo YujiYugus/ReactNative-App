@@ -37,10 +37,10 @@ export const AuthProviderList = (props: any): any => {
         modalizeRef?.current?.close();
     }
     useEffect(() => {
-        get_taskList
+        get_taskList()
     }, []);
 
-    //commit errado
+    //commit correto
 
     const _renderFlags = () => {
         return (
