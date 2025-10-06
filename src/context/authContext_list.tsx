@@ -69,7 +69,7 @@ export const AuthProviderList = (props: any): any => {
         }
         try {
             const newItem = {
-                item: Date.now,
+                item: Date.now(),
                 title,
                 description,
                 flags: selectedFlag,
@@ -83,8 +83,9 @@ export const AuthProviderList = (props: any): any => {
             }
             const storageData = await AsyncStorage.getItem('taskList');
             // console.log(storageData)
-            let taskList = storageData ? JSON.parse (storageData) : [];
-            taskList.push(newItem)
+            let taskList = storageData ? JSON.parse(storageData) : [];
+
+            taskList.push(newItem);
             await AsyncStorage.setItem('taskList', JSON.stringify(taskList))
 
             setTaskList(taskList);
@@ -98,11 +99,11 @@ export const AuthProviderList = (props: any): any => {
     }
     const setData = () => {
         setTitle(''),
-        setDescription(''),
-        setSelectedFlag('Urgente'),
-        setItem(0),
-        setSelectedDate(new Date()),
-        setSelectedTime(new Date())
+            setDescription(''),
+            setSelectedFlag('Urgente'),
+            setItem(0),
+            setSelectedDate(new Date())
+            setSelectedTime(new Date())
     }
 
     const _container = () => {
