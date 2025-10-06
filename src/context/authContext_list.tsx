@@ -37,7 +37,7 @@ export const AuthProviderList = (props: any): any => {
         modalizeRef?.current?.close();
     }
     useEffect(() => {
-        get_taskList
+        get_taskList()
     }, []);
 
     const _renderFlags = () => {
@@ -73,8 +73,8 @@ export const AuthProviderList = (props: any): any => {
                 item: Date.now(),
                 title,
                 description,
-                flags: selectedFlag,
-                timeLimite: new Date(
+                flag: selectedFlag,
+                timeLimit: new Date(
                     selectedDate.getFullYear(),
                     selectedDate.getMonth(),
                     selectedDate.getDate(),
@@ -198,7 +198,7 @@ export const AuthProviderList = (props: any): any => {
                     />
                 </View>
                 <View style={styles.containerFlag}>
-                    <Text style={styles.label}>Flags:</Text>
+                    <Text style={styles.label}>:</Text>
                     <View style={styles.rowFlags}>
                         {_renderFlags()}
                     </View>
