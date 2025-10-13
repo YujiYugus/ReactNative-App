@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "../pages/login";
 import BottomRoutes from "./bottom.routes";
+import EditUser from "../pages/user/EditUser";
 
 export default function Routes() {
     const Stack = createStackNavigator()
@@ -23,6 +24,12 @@ export default function Routes() {
             <Stack.Screen
                 name="BottomRoutes"
                 component={BottomRoutes}
+            />
+
+            <Stack.Screen
+                name="EditUser"
+                component={EditUser}
+                options={{ headerShown: false }}
             />
 
         </Stack.Navigator>
